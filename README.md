@@ -4,8 +4,6 @@ Python app that manages TFE trough its API.
 
 # TO-DO
 
-- Create a Vagrantfile
-- Create a provisioning script that checks for Python3 and installs it if not available
 - Create a python application that does the following: 
 
   - Create a Vagrantfile
@@ -19,3 +17,6 @@ Python app that manages TFE trough its API.
 
 
 # DONE
+
+- Create a Vagrantfile
+- Create a provisioning script that checks for Python3 and installs it if not available
