@@ -2,18 +2,19 @@
 
 import urllib.request, json
 
-token = "Bearer " + str(input('Please enter your token: '))
-organization_name = str(input('Please enter your organization name: '))
+#token = "Bearer " + str(input('Please enter your token: '))
+#organization_name = str(input('Please enter your organization name: '))
 
-"""
+
 # The following lines are left for development purposes. Should be removed in
 # the final version
 
-
+"""
 token = "Bearer " + ''
 organization_name = 'HiveCorp'
-workspace_name = str(input('Please enter your worksapce name: '))
+#workspace_name = str(input('Please enter your worksapce name: '))
 """
+
 
 # Define the main url to TFE
 url = 'https://app.terraform.io/api/v2/'
@@ -44,10 +45,15 @@ with urllib.request.urlopen(wspaces_request) as connection:
 # Count how many workspaces are available
 workspaces_count = str(org_wspaces_inf).count('name')
 
-# Create a list with the available workspaces
+# Create a list with the available workspaces and a list with their ids
 
+workspaces_ids_list = []
 workspaces_list = []
+
+# Maybe use dictionaries here ???
+#
 for i in range(workspaces_count):
+    workspaces_ids_list.append(json.loads(org_wspaces_inf)['data'][i]['id'])
     workspaces_list.append(json.loads(org_wspaces_inf)['data'][i]['attributes']['name'])
 
 def return_menu_option(options_list):
@@ -93,8 +99,38 @@ def return_menu_option(options_list):
             print("Invalid option.")
             print("Try again...")
 
-# The following code is left for debugging purposes. Should be removed in the
-# final version. 
 selected_workspace = return_menu_option(workspaces_list)
 
-print(selected_workspace, type(selected_workspace))
+def find_id(list1, list2, keyword):
+    """
+    (list, list, str) -> str
+
+    Precondition: Both lists must be with same length!
+
+    Returns the value of a corresponding index in list1 based on the index matching  keyword
+    in list2
+
+    >>> print(find_id(['fruit','vegetable', 'spice'], ['apple', 'cucumber', 'oil'], 'oil'))
+    spice
+    """
+
+    return list1[list2.index(keyword)]
+
+selected_worspace_id = find_id(workspaces_ids_list, workspaces_list, selected_workspace)
+
+print(selected_worspace_id)
+
+#print(workspaces_ids_list)
+# The following code is left for debugging purposes. Should be removed in the
+# final version.
+'''
+Performing a run on a new configuration is a multi-step process.
+
+Create a configuration version on the workspace.
+Upload configuration files to the configuration version.
+Create a run on the workspace; this is done automatically when a configuration file is uploaded.
+Create and queue an apply on the run; if auto-apply is not enabled.
+Alternatively, you can create a run with a pre-existing configuration version, even one from another workspace. This is useful for promoting known good code from one workspace to another.
+'''
+
+
