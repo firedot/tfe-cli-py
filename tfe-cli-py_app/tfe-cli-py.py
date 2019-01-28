@@ -3,7 +3,7 @@
 import urllib.request, json
 
 #token = "Bearer " + str(input('Please enter your token: '))
-token = "Bearer " + 'AyyxEpg871u6wA.atlasv1.Qlnaaez3Zrv7qmTyyPa0I5bQGpbiiQmZxcZfez8lrjx7ZaorQkyijruJ6hmUMnUqyCs'
+token = "Bearer " + 
 #organization_name = str(input('Please enter your organization name: '))
 organization_name = 'HiveCorp'
 #workspace_name = str(input('Please enter your worksapce name: '))
